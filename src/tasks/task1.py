@@ -29,16 +29,48 @@ def main():
 
 class GamesData:
 
-    def add_new_data(data: str): # data in format "team1;score;team2;score"
-        pass
+    def  __init__(self):
+        self.data:dict = {} # team: (all,win,tie,los,scr)
 
-    def add_new_data(team1:str, score1: int, team2: str, score2:int):
-        pass
+    def add_new_data(self,team1:str, score1: int, team2: str, score2: int) -> bool:
+        print(f"{team1} {score1} {team2} {score2}")
+        if(team1 not in self.data):
+            self.data[team1] = (0,0,0,0,0)
+        if(team2 not in self.data):
+            self.data[team2] = (0,0,0,0,0)
+        if score1 > score2: # win
+            self.__addWin(team1)
+            self.__addLose(team2)
+        elif score2 > score1: #lose
+            self.__addLose(team1)
+            self.__addWin(team2)
+        else:
+            self.__addTie(team1)
+            self.__addTie(team2)
 
-    def get_info(team: str):
-        pass
+    def __addWin(self,team:str):
+        self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,1,0,0,3)))
 
-    def get_all_info():
+    def __addLose(self,team:str):
+        self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,0,0,1,0)))
+
+    def __addTie(self,team:str):
+        self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,0,1,0,1)))
+
+    # data in format "team1;score;team2;score"
+    def add_new_data_as_string(self,data: str) -> bool:
+        list = data.split(';')
+        if len(list)!=4:
+            return False
+        return self.add_new_data(list[0],list[1],list[2],list[3])
+
+    def get_info(self,team: str) -> str: # all win tie los score
+        if team in self.data:
+            return " ".join(map(str,self.data[team]))
+        else:
+            return None
+
+    def get_all_info(self) -> str: # team: all win tie los score ...
         pass
 
 if __name__ == '__main__':
