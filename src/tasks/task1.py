@@ -75,7 +75,11 @@ class GamesData:
             return None
 
     def get_all_info(self) -> str: # team: all win tie los score ...
-        pass
+        res = ""
+        for key in sorted(self.data.items()):
+            res += f"{key[0]}: {self.get_info(key[0])}\n"
+        return res.rstrip('\n')
+
 
 if __name__ == '__main__':
     main()
