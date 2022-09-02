@@ -70,7 +70,7 @@ class GamesData:
 
     def get_info(self,team: str) -> str | None: # all win tie los score
         if team in self.data:
-            return " ".join(map(str,self.data[team]))
+            return ",".join(map(str,self.data[team]))
         else:
             return None
 
