@@ -41,6 +41,15 @@ class TestSum(unittest.TestCase):
         self.assertEqual(gd.get_info('Локомотив'),'2 2 0 0 6')
         self.assertEqual(gd.get_info('Челси'),None)
 
+    def test_allinfo(self):
+        gd = GamesData()
+        gd.adddatastr('Спартак;9;Зенит;10')
+        gd.adddatastr('Локомотив;12;Зенит;3')
+        gd.adddatastr('Спартак;8;Локомотив;15')
+        self.assertEqual(gd.get_all_info(),"Зенит: 2 1 0 1 3\nЛокомотив: 2 2 0 0 6\nСпартак: 2 0 0 2 0")
+
+
+
     
 
 

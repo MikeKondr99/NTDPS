@@ -70,12 +70,16 @@ class GamesData:
 
     def get_info(self,team: str) -> str | None: # all win tie los score
         if team in self.data:
-            return ",".join(map(str,self.data[team]))
+            return " ".join(map(str,self.data[team]))
         else:
             return None
 
     def get_all_info(self) -> str: # team: all win tie los score ...
-        pass
+        res = ""
+        for key in sorted(self.data.items()):
+            res += f"{key[0]}: {self.get_info(key[0])}\n"
+        return res.rstrip('\n')
+
 
 if __name__ == '__main__':
     main()
