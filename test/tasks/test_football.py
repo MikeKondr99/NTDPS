@@ -1,5 +1,5 @@
 import unittest
-from src.tasks.task1 import GamesData
+from src.tasks.football import GamesData
 
 class TestSum(unittest.TestCase):
 
