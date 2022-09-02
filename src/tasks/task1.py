@@ -24,16 +24,19 @@ Sample Output:
 Локомотив:2 2 0 0 6 
 
 '''
-def main():
-    pass
+
+def main() -> None:
+    gd = GamesData()
+    gd.adddatastr('Спартак;9;Зенит;10')
+    gd.adddatastr('Локомотив;12;Зенит;3')
+    gd.adddatastr('Спартак;8;Локомотив;15')
 
 class GamesData:
 
-    def  __init__(self):
+    def  __init__(self) -> None:
         self.data:dict = {} # team: (all,win,tie,los,scr)
 
-    def add_new_data(self,team1:str, score1: int, team2: str, score2: int) -> bool:
-        print(f"{team1} {score1} {team2} {score2}")
+    def adddata(self,team1:str, score1: int, team2: str, score2: int) -> bool:
         if(team1 not in self.data):
             self.data[team1] = (0,0,0,0,0)
         if(team2 not in self.data):
@@ -47,24 +50,25 @@ class GamesData:
         else:
             self.__addTie(team1)
             self.__addTie(team2)
+        return True
 
-    def __addWin(self,team:str):
+    def __addWin(self,team:str) -> None:
         self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,1,0,0,3)))
 
-    def __addLose(self,team:str):
+    def __addLose(self,team:str) -> None:
         self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,0,0,1,0)))
 
-    def __addTie(self,team:str):
+    def __addTie(self,team:str) -> None:
         self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,0,1,0,1)))
 
     # data in format "team1;score;team2;score"
-    def add_new_data_as_string(self,data: str) -> bool:
+    def adddatastr(self,data: str) -> bool:
         list = data.split(';')
         if len(list)!=4:
             return False
-        return self.add_new_data(list[0],list[1],list[2],list[3])
+        return self.adddata(list[0],int(list[1]),list[2],int(list[3]))
 
-    def get_info(self,team: str) -> str: # all win tie los score
+    def get_info(self,team: str) -> str | None: # all win tie los score
         if team in self.data:
             return " ".join(map(str,self.data[team]))
         else:
