@@ -27,46 +27,46 @@ Sample Output:
 
 def main() -> None:
     gd = GamesData()
-    gd.adddatastr('Спартак;9;Зенит;10')
-    gd.adddatastr('Локомотив;12;Зенит;3')
-    gd.adddatastr('Спартак;8;Локомотив;15')
+    gd.add_data_str('Спартак;9;Зенит;10')
+    gd.add_data_str('Локомотив;12;Зенит;3')
+    gd.add_data_str('Спартак;8;Локомотив;15')
 
 class GamesData:
 
     def  __init__(self) -> None:
         self.data:dict = {} # team: (all,win,tie,los,scr)
 
-    def adddata(self,team1:str, score1: int, team2: str, score2: int) -> bool:
+    def add_data(self,team1:str, score1: int, team2: str, score2: int) -> bool:
         if(team1 not in self.data):
             self.data[team1] = (0,0,0,0,0)
         if(team2 not in self.data):
             self.data[team2] = (0,0,0,0,0)
         if score1 > score2: # win
-            self.__addWin(team1)
-            self.__addLose(team2)
+            self._add_win(team1)
+            self._add_lose(team2)
         elif score2 > score1: #lose
-            self.__addLose(team1)
-            self.__addWin(team2)
+            self._add_lose(team1)
+            self._add_win(team2)
         else:
-            self.__addTie(team1)
-            self.__addTie(team2)
+            self.add_tie(team1)
+            self.add_tie(team2)
         return True
 
-    def __addWin(self,team:str) -> None:
+    def _add_win(self,team:str) -> None:
         self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,1,0,0,3)))
 
-    def __addLose(self,team:str) -> None:
+    def _add_lose(self,team:str) -> None:
         self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,0,0,1,0)))
 
-    def __addTie(self,team:str) -> None:
+    def add_tie(self,team:str) -> None:
         self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,0,1,0,1)))
 
     # data in format "team1;score;team2;score"
-    def adddatastr(self,data: str) -> bool:
+    def add_data_str(self,data: str) -> bool:
         list = data.split(';')
         if len(list)!=4:
             return False
-        return self.adddata(list[0],int(list[1]),list[2],int(list[3]))
+        return self.add_data(list[0],int(list[1]),list[2],int(list[3]))
 
     def get_info(self,team: str) -> str | None: # all win tie los score
         if team in self.data:
