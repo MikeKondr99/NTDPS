@@ -38,3 +38,8 @@ jobs:
       run: |
         # checking types in src
         mypy src
+    - name: Unit testing
+      run: |
+        # checking run unit
+        python -m unittest discover -v
+
