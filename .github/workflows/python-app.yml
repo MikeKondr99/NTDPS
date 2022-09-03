@@ -35,7 +35,7 @@ jobs:
     - name: TypeChecking
       run: |
         # checking types in src
-        mypy src
+        mypy . --strict
     - name: Unit testing
       run: |
         # checking run unit

@@ -3,7 +3,7 @@
 from src.tasks.football import GamesData
 
 
-def task1():
+def task1() -> None:
     path = input("Путь к файлу данных: ")
     with open(path) as f:
         lines = f.readlines()

@@ -25,6 +25,8 @@ Sample Output:
 
 '''
 
+from typing import Tuple, cast
+
 def main() -> None:
     gd = GamesData()
     gd.add_data_str('Спартак;9;Зенит;10')
@@ -34,12 +36,12 @@ def main() -> None:
 class GamesData:
 
     def  __init__(self) -> None:
-        self.data:dict = {} # team: (all,win,tie,los,scr)
+        self.data:dict[str,Tuple[int,int,int,int,int]] = {} # team: (all,win,tie,los,scr)
 
     def add_data(self,team1:str, score1: int, team2: str, score2: int) -> bool:
-        if(team1 not in self.data):
+        if team1 not in self.data:
             self.data[team1] = (0,0,0,0,0)
-        if(team2 not in self.data):
+        if team2 not in self.data:
             self.data[team2] = (0,0,0,0,0)
         if score1 > score2: # win
             self._add_win(team1)
@@ -53,13 +55,13 @@ class GamesData:
         return True
 
     def _add_win(self,team:str) -> None:
-        self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,1,0,0,3)))
+        self.data[team] = cast(Tuple[int,int,int,int,int],tuple(map(lambda x, y: x + y, self.data[team] , (1,1,0,0,3))))
 
     def _add_lose(self,team:str) -> None:
-        self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,0,0,1,0)))
+        self.data[team] = cast(Tuple[int,int,int,int,int],tuple(map(lambda x, y: x + y, self.data[team] , (1,0,0,1,0))))
 
     def add_tie(self,team:str) -> None:
-        self.data[team] = tuple(map(lambda x, y: x + y, self.data[team] , (1,0,1,0,1)))
+        self.data[team] = cast(Tuple[int,int,int,int,int],tuple(map(lambda x, y: x + y, self.data[team] , (1,0,1,0,1))))
 
     # data in format "team1;score;team2;score"
     def add_data_str(self,data: str) -> bool:
