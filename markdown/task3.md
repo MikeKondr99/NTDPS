@@ -5,7 +5,7 @@
 Дана база данных магазина `store` следующей структуры:
 
 ```mermaid
-%%{init: {'themeCSS': '.er.entityLabel {stroke: black !important;} .er.entityBox { fill:rgb(181, 181, 238) !important; }'}}%%
+%%{init: {'themeCSS': '.er.entityLabel {fill: black !important;} .er.entityBox { fill:rgb(181, 181, 238) !important; }'}}%%
 erDiagram
 
 sale_history {
