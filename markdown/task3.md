@@ -5,6 +5,7 @@
 Дана база данных магазина `store` следующей структуры:
 
 ```mermaid
+%%{init: {'theme': 'base' }}%%
 erDiagram
 
 sale_history {
