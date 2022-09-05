@@ -30,7 +30,7 @@ Softwqare
 ```
 
 Вывод
-```
+``` console
 genous
 the
 softwqare 
