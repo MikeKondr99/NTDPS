@@ -1,4 +1,5 @@
 
+from cmath import exp
 import unittest
 from src.tasks.dictionary import WordDict
 
@@ -23,6 +24,12 @@ class TestWordDict(unittest.TestCase):
         self.assertEqual(d.check('mango banana'),False)
         self.assertEqual(d.check('mango '),False)
 
+    def test_check_string(self) -> None:
+        d = WordDict()
+        d.add_word('we','are','Software','genious')
+        result = d.errors_in("We Are The Software genous ")
+        expected = {"genous","the"}
+        self.assertEqual(result,expected)
 
 if __name__ == '__main__':
     unittest.main()
