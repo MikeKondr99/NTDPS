@@ -9,51 +9,51 @@
 erDiagram
 
 sale_history {
-    id int PK
-    sale_id int FK
-    status_id int FK
-    sale_sum decimal 
-    active_from date
-    active_to date
+    id INT PK
+    sale_id INT FK
+    status_id INT FK
+    sale_sum DECIMAL 
+    active_from DATE
+    active_to DATE
 }
 
 status {
-    id int PK
-    name varchar
+    id INT PK
+    name VARCHAR
 }
 
 sale {
-    id int PK
-    client_id int FK
-    number varchar
-    dt_created date
-    dt_modified date
-    sale_sum decimal
-    status_id int FK
+    id INT PK
+    client_id INT FK
+    number VARCHAR
+    dt_created DATE
+    dt_modified DATE
+    sale_sum DECIMAL
+    status_id INT FK
 }
 
 category {
-    id int PK
-    name varchar
+    id INT PK
+    name VARCHAR
 }
 
 good {
-    id int PK
-    name varchar
-    price decimal
+    id INT PK
+    name VARCHAR
+    price DECIMAL
 }
 
 client {
-    id int PK
-    code varchar
-    first_name varchar
-    last_name varchar
-    source_id int FK
+    id INT PK
+    code VARCHAR
+    first_name VARCHAR
+    last_name VARCHAR
+    source_id INT FK
 }
 
 source {
-    id int PK
-    name varchar
+    id INT PK
+    name VARCHAR
 }
 
 client }|--|| source : has
@@ -95,4 +95,5 @@ SELECT * FROM A
         ON a.c_id = C.id
 ```
 
-Рекомендованные базы данных: `postgreSQL`, `mySQL`
+> *Примечание*  
+> Рекомендованные базы данных: `postgreSQL`, `mySQL`
