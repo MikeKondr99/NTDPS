@@ -78,8 +78,8 @@ class GamesData:
 
     def get_all_info(self) -> str: # team: all win tie los score ...
         res = ""
-        for key in sorted(self.data.items()):
-            res += f"{key[0]}: {self.get_info(key[0])}\n"
+        for key in self.data:
+            res += f'{key}: {self.get_info(key)}\n'
         return res.rstrip('\n')
 
 

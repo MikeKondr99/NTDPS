@@ -1,3 +1,4 @@
+from cmath import exp
 import unittest
 from src.tasks.football import GamesData
 
@@ -46,7 +47,11 @@ class TestSum(unittest.TestCase):
         gd.add_data_str('Спартак;9;Зенит;10')
         gd.add_data_str('Локомотив;12;Зенит;3')
         gd.add_data_str('Спартак;8;Локомотив;15')
-        self.assertEqual(gd.get_all_info(),"Зенит: 2 1 0 1 3\nЛокомотив: 2 2 0 0 6\nСпартак: 2 0 0 2 0")
+        result = set(gd.get_all_info().split('\n'))
+        expected = {'Зенит: 2 1 0 1 3','Локомотив: 2 2 0 0 6','Спартак: 2 0 0 2 0'}
+        expected2 = {'Локомотив: 2 2 0 0 6','Зенит: 2 1 0 1 3','Спартак: 2 0 0 2 0'}
+        self.assertEqual(result,expected)
+        self.assertEqual(result,expected2)
 
 
 
