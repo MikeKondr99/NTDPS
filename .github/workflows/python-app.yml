@@ -35,7 +35,7 @@ jobs:
     - name: TypeChecking
       run: |
         # checking types in src
-        mypy . --strict --install-types
+        mypy . --strict
     - name: Unit testing
       run: |
         # checking run unit
