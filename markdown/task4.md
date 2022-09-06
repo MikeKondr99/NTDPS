@@ -55,14 +55,13 @@ source {
     id INT PK
     name VARCHAR
 }
-
 client }|--|| source : has
-sale ||--|{ client : sign_by
+sale }o--|| client : sign_by
 good }o--o{ category : has
-sale }|--|| sale_history : has
-status }|--|| sale_history : of
-status }|--|| sale : of
-sale }|--|{ good : of
+sale ||--o| sale_history : has
+status ||--o{ sale_history : of
+status ||--o{ sale : of
+sale }o--|{ good : of
 ```
 
 В таблице `client` ограничение внешнего ключа называется
@@ -127,12 +126,12 @@ client {
     last_name VARCHAR
 }
 
-sale ||--|{ client : sign_by
+sale }o--|| client : sign_by
 good }o--o{ category : has
-sale }|--|| sale_history : has
-status }|--|| sale_history : of
-status }|--|| sale : of
-sale }|--|{ good : of
+sale ||--o| sale_history : has
+status ||--o{ sale_history : of
+status ||--o{ sale : of
+sale }o--|{ good : of
 ```
 
 > *Примечание*  
