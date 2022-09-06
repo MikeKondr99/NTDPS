@@ -57,12 +57,12 @@ source {
 }
 
 client }|--|| source : has
-sale ||--|{ client : sign_by
-good }|--o{ category : has
-sale }|--|| sale_history : has
-status }|--|| sale_history : of
-status }|--|| sale : of
-sale }|--|{ good : of
+sale }o--|| client : sign_by
+good }o--o{ category : has
+sale ||--o| sale_history : has
+status ||--o{ sale_history : of
+status ||--o{ sale : of
+sale }o--|{ good : of
 ```
 
 1. Создайте заданную базу данных
@@ -71,29 +71,23 @@ sale }|--|{ good : of
 
 
 | good_name | category_name |
-| ----       | ----          |
+| -         | -             |
 | good 1    | category 1    |
 | good 1    | category 2    |
 | good 2    | category 3    |
 | good 2    | category 4    |
 | good 3    | category 7    |
-| ... ||
 
-
-
-*Примечание*
-
-1. Выборки, полученные с помощью оператора `SELECT` могут быть отсортированы по нескольким атрибутам. Для этого необходимо в операторе `ORDER BY` указать набор атрибутов через запятую в необходимом порядке.
-
-2. В запросе для соединения нескольких источников данных операцию соединения можно использовать многократно. Например, для соединения таблиц A, B и C можно использовать запрос вида:
-
-``` SQL
-SELECT * FROM A
-    INNER JOIN B
-        ON A.b_id = B.id
-    INNER JOIN C
-        ON a.c_id = C.id
-```
 
 > *Примечание*  
-> Рекомендованные базы данных: `postgreSQL`, `mySQL`
+> 1. Выборки, полученные с помощью оператора `SELECT` могут быть отсортированы по нескольким атрибутам. Для этого необходимо в операторе `ORDER BY` указать набор атрибутов через запятую в необходимом порядке.
+> 1. В запросе для соединения нескольких источников данных операцию соединения можно использовать многократно. Например, для соединения таблиц A, B и C можно использовать запрос вида:
+> 
+> ``` SQL
+> SELECT * FROM A
+>     INNER JOIN B
+>         ON A.b_id = B.id
+>     INNER JOIN C
+>         ON a.c_id = C.id
+> ```
+> 3. Рекомендованные базы данных: `postgreSQL`, `mySQL`

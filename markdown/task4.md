@@ -55,14 +55,13 @@ source {
     id INT PK
     name VARCHAR
 }
-
 client }|--|| source : has
-sale ||--|{ client : sign_by
-good }|--o{ category : has
-sale }|--|| sale_history : has
-status }|--|| sale_history : of
-status }|--|| sale : of
-sale }|--|{ good : of
+sale }o--|| client : sign_by
+good }o--o{ category : has
+sale ||--o| sale_history : has
+status ||--o{ sale_history : of
+status ||--o{ sale : of
+sale }o--|{ good : of
 ```
 
 В таблице `client` ограничение внешнего ключа называется
@@ -79,6 +78,61 @@ sale }|--|{ good : of
 
 Удаление ограничения внешнего ключа и поля таблицы необходимо
 производить в рамках одного вызова `ALTER TABLE`
+
+
+### Финальная схема базы данных `store`
+```mermaid
+%%{init: {'themeCSS': '.er.entityLabel {fill: black !important;} .er.entityBox { fill:rgb(181, 181, 238) !important; }'}}%%
+erDiagram
+
+sale_history {
+    id INT PK
+    sale_id INT FK
+    status_id INT FK
+    sale_sum DECIMAL 
+    active_from DATE
+    active_to DATE
+}
+
+status {
+    id INT PK
+    name VARCHAR
+}
+
+sale {
+    id INT PK
+    client_id INT FK
+    number VARCHAR
+    dt_created DATE
+    dt_modified DATE
+    sale_sum DECIMAL
+    status_id INT FK
+}
+
+category {
+    id INT PK
+    name VARCHAR
+}
+
+good {
+    id INT PK
+    name VARCHAR
+    price DECIMAL
+}
+
+client {
+    id INT PK
+    first_name VARCHAR
+    last_name VARCHAR
+}
+
+sale }o--|| client : sign_by
+good }o--o{ category : has
+sale ||--o| sale_history : has
+status ||--o{ sale_history : of
+status ||--o{ sale : of
+sale }o--|{ good : of
+```
 
 > *Примечание*  
 > При выполнении `ALTER TABLE` не следует указывать название схемы.  
