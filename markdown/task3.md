@@ -58,7 +58,7 @@ source {
 
 client }|--|| source : has
 sale ||--|{ client : sign_by
-good }|--o{ category : has
+good }o--o{ category : has
 sale }|--|| sale_history : has
 status }|--|| sale_history : of
 status }|--|| sale : of

@@ -1,9 +1,8 @@
 
 from typing import Callable
-from src.tasks.football import GamesData
-from src.tasks.dictionary import WordDict
 
 def task1() -> None:
+    from src.tasks.football import GamesData
     path = input("Путь к файлу данных: ")
     with open(path) as f:
         lines = f.readlines()
@@ -14,6 +13,7 @@ def task1() -> None:
         print(data.get_all_info())
 
 def task2() -> None:
+    from src.tasks.dictionary import WordDict
     path = input("Путь к файлу: ")
 
     with open(path) as f:
@@ -28,11 +28,17 @@ def task2() -> None:
             errors = errors.union(d.errors_in(line))
         print("\n".join(errors))
 
+def task3() -> None:
+    import src.tasks.db1 as db
+    db.create("files/database.sqlite")
+    pass
+
 
 
 tasks:dict[str,Callable[[],None]] = {
     "t1":task1,
     "t2":task2,
+    "t3":task3,
 }
             
 
