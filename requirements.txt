@@ -1,1 +1,7 @@
+tabulate
 types-tabulate
+pandas
+pandas-stubs
+ipykernel
+nbopen
+plotly

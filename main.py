@@ -1,6 +1,15 @@
 import os
 from typing import Callable
 
+def lab1() -> None:
+    print('Лабораторная 1')
+    print('Открываем интерактивную среду :D ...')
+    import subprocess
+    subprocess.run(["nbopen","src/labs/ufo_data.ipynb"])
+
+    
+
+
 def task1() -> None:
     print('ЗАДАЧА 1')
     from src.tasks.football import GamesData
@@ -10,7 +19,7 @@ def task1() -> None:
         data = GamesData()
         for line in lines:
             if not data.add_data_str(line):
-                print(f'Строчка {line} не корректна')
+                print(f'Строка "{line}" не корректна')
         print(data.get_all_info())
 
 def task2() -> None:
@@ -49,6 +58,7 @@ tasks:dict[str,Callable[[],None]] = {
     't2':task2,
     't3':task3,
     't4':task4,
+    'l1':lab1,
 }
             
 
