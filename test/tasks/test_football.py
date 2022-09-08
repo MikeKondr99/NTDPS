@@ -2,7 +2,7 @@ from cmath import exp
 import unittest
 from src.tasks.football import GamesData
 
-class TestSum(unittest.TestCase):
+class TestFootball(unittest.TestCase):
 
     def test_lose_match(self) -> None:
         gd = GamesData()
