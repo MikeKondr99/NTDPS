@@ -51,6 +51,9 @@ def task4() -> None:
     db.create('files/database.sqlite',True)
     pass
 
+def task5() -> None:
+    print('ЗАДАЧА 5')
+
 
 
 tasks:dict[str,Callable[[],None]] = {
