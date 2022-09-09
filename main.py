@@ -1,13 +1,21 @@
 import os
-from typing import Callable
+from typing import Callable,Tuple
 
 def lab1() -> None:
+    from src.labs.my_calc import eval
     print('Лабораторная 1')
+    text = ''
+    while text != 'q':
+        try:
+            text = input('> ')
+            print(eval(text))
+        except Exception as e:
+            print(str(e))
+
+    return 
     print('Открываем интерактивную среду :D ...')
     import subprocess
     subprocess.run(["nbopen","src/labs/ufo_data.ipynb"])
-
-    
 
 
 def task1() -> None:
@@ -52,7 +60,6 @@ def task4() -> None:
     pass
 
 
-
 tasks:dict[str,Callable[[],None]] = {
     't1':task1,
     't2':task2,
@@ -61,7 +68,6 @@ tasks:dict[str,Callable[[],None]] = {
     'l1':lab1,
 }
             
-
 def main() -> None:
     if not os.path.isdir('files'):
         os.mkdir('files')
