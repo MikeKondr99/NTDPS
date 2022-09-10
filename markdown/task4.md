@@ -1,5 +1,7 @@
 ## Задание 4
 
+[Реализация](../src/tasks/db.ipynb)
+
 ### Тема: "Основы реляционных баз данных".
 
 Дана база данных магазина `store` следующей структуры:
@@ -8,60 +10,62 @@
 erDiagram
 %%{init: {'themeCSS': '.er.entityLabel {fill: black !important;} .er.entityBox { fill:rgb(181, 181, 238) !important; }'}}%%
 
-sale_history {
-    id INT PK
-    sale_id INT FK
-    status_id INT FK
-    sale_sum DECIMAL 
-    active_from DATE
-    active_to DATE
-}
+    sale_history {
+        id INT PK
+        sale_id INT FK
+        status_id INT FK
+        sale_sum DECIMAL 
+        active_from DATE
+        active_to DATE
+    }
 
-status {
-    id INT PK
-    name VARCHAR
-}
+    status {
+        id INT PK
+        name VARCHAR
+    }
 
-sale {
-    id INT PK
-    client_id INT FK
-    number VARCHAR
-    dt_created DATE
-    dt_modified DATE
-    sale_sum DECIMAL
-    status_id INT FK
-}
+    sale {
+        id INT PK
+        client_id INT FK
+        number VARCHAR
+        dt_created DATE
+        dt_modified DATE
+        sale_sum DECIMAL
+        status_id INT FK
+    }
 
-category {
-    id INT PK
-    name VARCHAR
-}
+    category {
+        id INT PK
+        name VARCHAR
+    }
 
-good {
-    id INT PK
-    name VARCHAR
-    price DECIMAL
-}
+    good {
+        id INT PK
+        name VARCHAR
+        price DECIMAL
+    }
 
-client {
-    id INT PK
-    code VARCHAR
-    first_name VARCHAR
-    last_name VARCHAR
-    source_id INT FK
-}
+    client {
+        id INT PK
+        code VARCHAR
+        first_name VARCHAR
+        last_name VARCHAR
+        source_id INT FK
+    }
 
-source {
-    id INT PK
-    name VARCHAR
-}
-client }|--|| source : has
-sale }o--|| client : sign_by
-good }o--o{ category : has
-sale ||--o| sale_history : has
-status ||--o{ sale_history : of
-status ||--o{ sale : of
-sale }o--|{ good : of
+    source {
+        id INT PK
+        name VARCHAR
+    }
+
+    client }|--|| source : has
+    sale }o--|| client : sign_by
+    good }o--o{ category : has
+    sale ||--o| sale_history : has
+    status ||--o{ sale_history : of
+    status ||--o{ sale : of
+    sale }o--|{ good : of
+
 ```
 
 В таблице `client` ограничение внешнего ключа называется
@@ -82,56 +86,62 @@ sale }o--|{ good : of
 
 ### Финальная схема базы данных `store`
 ```mermaid
-%%{init: {'themeCSS': '.er.entityLabel {fill: black !important;} .er.entityBox { fill:rgb(181, 181, 238) !important; }'}}%%
 erDiagram
+%%{init: {'themeCSS': '.er.entityLabel {fill: black !important;} .er.entityBox { fill:rgb(181, 181, 238) !important; }'}}%%
 
-sale_history {
-    id INT PK
-    sale_id INT FK
-    status_id INT FK
-    sale_sum DECIMAL 
-    active_from DATE
-    active_to DATE
-}
+    sale_history {
+        id INT PK
+        sale_id INT FK
+        status_id INT FK
+        sale_sum DECIMAL 
+        active_from DATE
+        active_to DATE
+    }
 
-status {
-    id INT PK
-    name VARCHAR
-}
+    status {
+        id INT PK
+        name VARCHAR
+    }
 
-sale {
-    id INT PK
-    client_id INT FK
-    number VARCHAR
-    dt_created DATE
-    dt_modified DATE
-    sale_sum DECIMAL
-    status_id INT FK
-}
+    sale {
+        id INT PK
+        client_id INT FK
+        number VARCHAR
+        dt_created DATE
+        dt_modified DATE
+        sale_sum DECIMAL
+        status_id INT FK
+    }
 
-category {
-    id INT PK
-    name VARCHAR
-}
+    category {
+        id INT PK
+        name VARCHAR
+    }
 
-good {
-    id INT PK
-    name VARCHAR
-    price DECIMAL
-}
+    good {
+        id INT PK
+        name VARCHAR
+        price DECIMAL
+    }
 
-client {
-    id INT PK
-    first_name VARCHAR
-    last_name VARCHAR
-}
+    client {
+        id INT PK
+        first_name VARCHAR
+        last_name VARCHAR
+    }
 
-sale }o--|| client : sign_by
-good }o--o{ category : has
-sale ||--o| sale_history : has
-status ||--o{ sale_history : of
-status ||--o{ sale : of
-sale }o--|{ good : of
+    source {
+        id INT PK
+        name VARCHAR
+    }
+
+    sale }o--|| client : sign_by
+    good }o--o{ category : has
+    sale ||--o| sale_history : has
+    status ||--o{ sale_history : of
+    status ||--o{ sale : of
+    sale }o--|{ good : of
+
 ```
 
 > *Примечание*  
