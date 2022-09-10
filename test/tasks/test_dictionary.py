@@ -1,34 +1,33 @@
-import unittest
+import pytest
 from src.tasks.dictionary import WordDict
 
 
-class TestWordDict(unittest.TestCase):
-    def test_add_word(self) -> None:
-        d = WordDict()
-        d.add_word("word")
-        self.assertEqual(d.check("word"), True)
-        self.assertEqual(d.check("WORD"), True)
-        self.assertEqual(d.check("Word"), True)
-        self.assertEqual(d.check("W0rd"), False)
-
-    def test_add_multiple_word(self) -> None:
-        d = WordDict()
-        d.add_word("mango", "banana")
-        self.assertEqual(d.check("mango"), True)
-        self.assertEqual(d.check("MaNgO"), True)
-        self.assertEqual(d.check("banana"), True)
-        self.assertEqual(d.check("BAnaNA"), True)
-        self.assertEqual(d.check("word"), False)
-        self.assertEqual(d.check("mango banana"), False)
-        self.assertEqual(d.check("mango "), False)
-
-    def test_check_string(self) -> None:
-        d = WordDict()
-        d.add_word("we", "are", "Software", "genious")
-        result = d.errors_in("We Are The Software genous ")
-        expected = {"genous", "the"}
-        self.assertEqual(result, expected)
+@pytest.fixture
+def fix() -> WordDict:
+    return WordDict()
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_add_word(fix: WordDict) -> None:
+    fix.add_word("word")
+    assert fix.check("word")
+    assert fix.check("WORD")
+    assert fix.check("Word")
+    assert not fix.check("W0rd")
+
+
+def test_add_multiple_word(fix: WordDict) -> None:
+    fix.add_word("mango", "banana")
+    assert fix.check("mango")
+    assert fix.check("MaNgO")
+    assert fix.check("banana")
+    assert fix.check("BAnaNA")
+    assert not fix.check("word")
+    assert not fix.check("mango banana")
+    assert not fix.check("mango ")
+
+
+def test_check_string(fix: WordDict) -> None:
+    fix.add_word("we", "are", "Software", "genious")
+    result = fix.errors_in("We Are The Software genous ")
+    expected = {"genous", "the"}
+    assert result == expected
