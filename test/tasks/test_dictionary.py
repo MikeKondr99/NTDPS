@@ -9,21 +9,21 @@ def fix() -> WordDict:
 
 def test_add_word(fix: WordDict) -> None:
     fix.add_word("word")
-    assert fix.check("word") == True
-    assert fix.check("WORD") == True
-    assert fix.check("Word") == True
-    assert fix.check("W0rd") == False
+    assert fix.check("word")
+    assert fix.check("WORD")
+    assert fix.check("Word")
+    assert not fix.check("W0rd")
 
 
 def test_add_multiple_word(fix: WordDict) -> None:
     fix.add_word("mango", "banana")
-    assert fix.check("mango") == True
-    assert fix.check("MaNgO") == True
-    assert fix.check("banana") == True
-    assert fix.check("BAnaNA") == True
-    assert fix.check("word") == False
-    assert fix.check("mango banana") == False
-    assert fix.check("mango ") == False
+    assert fix.check("mango")
+    assert fix.check("MaNgO")
+    assert fix.check("banana")
+    assert fix.check("BAnaNA")
+    assert not fix.check("word")
+    assert not fix.check("mango banana")
+    assert not fix.check("mango ")
 
 
 def test_check_string(fix: WordDict) -> None:

@@ -32,7 +32,7 @@ def test_accumulative_win(fix: GamesData) -> None:
 
 
 def test_no_info(fix: GamesData) -> None:
-    assert fix.get_info("Спартак") == None
+    assert fix.get_info("Спартак") is None
 
 
 def test_example(fix: GamesData) -> None:
@@ -42,7 +42,7 @@ def test_example(fix: GamesData) -> None:
     assert fix.get_info("Спартак") == "2 0 0 2 0"
     assert fix.get_info("Зенит") == "2 1 0 1 3"
     assert fix.get_info("Локомотив") == "2 2 0 0 6"
-    assert fix.get_info("Челси") == None
+    assert fix.get_info("Челси") is None
 
 
 def test_all_info(fix: GamesData) -> None:

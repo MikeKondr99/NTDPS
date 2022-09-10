@@ -1,7 +1,6 @@
 import pytest
 import math
 import src.labs.lab1.my_calc as calc
-from typing import Tuple
 
 
 def _test(expr: str, rpn: str, answer: str | float | None = None) -> None:
