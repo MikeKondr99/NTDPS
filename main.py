@@ -2,13 +2,20 @@ import os
 from typing import Callable
 import src.tasks.football as Task1  # Задача 1
 import src.tasks.dictionary as Task2  # Задача 2
-import src.tasks.db1 as Task34  # Задача 3 и 4
 import src.labs.lab1.my_calc as calc  # Лабораторная 1.2
 import subprocess  # для запуска питон ноутбуков
 
 
-def lab1() -> None:
-    print("Лабораторная 1")
+def run_notebook(path: str) -> None:
+    print("Открываем интерактивную среду ...")
+    subprocess.run(["nbopen", path])
+
+
+def lab1_1() -> None:
+    run_notebook("src/labs/lab1/ufo_data.ipynb")
+
+
+def lab1_2() -> None:
     text = ""
     while text != "q":
         try:
@@ -16,13 +23,9 @@ def lab1() -> None:
             print(calc.eval(text))
         except Exception as e:
             print(str(e))
-    return
-    print("Открываем интерактивную среду : D ...")
-    subprocess.run(["nbopen", "src/labs/ufo_data.ipynb"])
 
 
 def task1() -> None:
-    print("ЗАДАЧА 1")
     path = input("Путь к файлу данных: ")
     with open(path) as f:
         lines = f.readlines()
@@ -34,7 +37,6 @@ def task1() -> None:
 
 
 def task2() -> None:
-    print("ЗАДАЧА 2")
     path = input("Путь к файлу: ")
 
     with open(path) as f:
@@ -50,33 +52,38 @@ def task2() -> None:
         print("\n".join(errors))
 
 
-def task3() -> None:
-    print("ЗАДАЧА 3")
-    Task34.create("files/database.sqlite")
-
-
-def task4() -> None:
-    print("ЗАДАЧА 4")
-    Task34.create("files/database.sqlite", True)
+def task34() -> None:
+    run_notebook("src/tasks/db.ipynb")
 
 
 tasks: dict[str, Callable[[], None]] = {
     "t1": task1,
     "t2": task2,
-    "t3": task3,
-    "t4": task4,
-    "l1": lab1,
+    "t3": task34,
+    "t4": task34,
+    "l1.1": lab1_1,
+    "l1.2": lab1_2,
 }
 
 
 def main() -> None:
-    if not os.path.isdir("files"):
-        os.mkdir("files")
-    choice = input("Введите что запустить (t# или l#): ")
-    if choice in tasks:
-        tasks[choice]()
-    else:
-        print(f"Не существует такого задания {choice}")
+    choice = ""
+    while choice != "q":
+        if not os.path.isdir("files"):
+            os.mkdir("files")
+        choice = input("Введите что запустить (t# или l#): ")
+        if choice in tasks:
+            if choice[0] == "t":
+                print(f"ЗАДАЧА {choice[1:]}")
+            elif choice[0] == "l":
+                print(f"ЛАБОРАТОРНАЯ {choice[1:]}")
+            tasks[choice]()
+        else:
+            hints = filter(lambda x: x.startswith(choice), tasks)
+            if hints:
+                print(f'Может вы имели ввиду {" ".join(hints)}')
+            print(f"Не существует такого задания {choice}")
+            input()
 
 
 if __name__ == "__main__":
