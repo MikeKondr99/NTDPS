@@ -3,3 +3,4 @@
 .mypy_cache
 files
 **/.ipynb_*
+**/.pytest_cache
