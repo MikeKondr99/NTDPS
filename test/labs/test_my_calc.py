@@ -3,7 +3,7 @@ from ast import expr_context
 from unicodedata import numeric
 import unittest
 import math
-import src.labs.my_calc as calc
+import src.labs.lab1.my_calc as calc
 
 class TestSum(unittest.TestCase):
 

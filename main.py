@@ -1,8 +1,12 @@
 import os
-from typing import Callable,Tuple
+from typing import Callable
+import src.tasks.football as Task1 # Задача 1
+import src.tasks.dictionary as Task2 # Задача 2
+import src.tasks.db1 as Task34 # Задача 3 и 4
+import src.labs.lab1.my_calc as calc # Лабораторная 1.2
+import subprocess # для запуска питон ноутбуков
 
 def lab1() -> None:
-    from src.labs.my_calc import eval
     print('Лабораторная 1')
     text = ''
     while text != 'q':
@@ -14,17 +18,15 @@ def lab1() -> None:
 
     return 
     print('Открываем интерактивную среду :D ...')
-    import subprocess
     subprocess.run(["nbopen","src/labs/ufo_data.ipynb"])
 
 
 def task1() -> None:
     print('ЗАДАЧА 1')
-    from src.tasks.football import GamesData
     path = input('Путь к файлу данных: ')
     with open(path) as f:
         lines = f.readlines()
-        data = GamesData()
+        data = Task1.GamesData()
         for line in lines:
             if not data.add_data_str(line):
                 print(f'Строка "{line}" не корректна')
@@ -32,7 +34,6 @@ def task1() -> None:
 
 def task2() -> None:
     print('ЗАДАЧА 2')
-    from src.tasks.dictionary import WordDict
     path = input('Путь к файлу: ')
 
     with open(path) as f:
@@ -40,7 +41,7 @@ def task2() -> None:
         words:list[str] = [f.readline().rstrip('\n') for i in range(0,words_len)]
         inputs_len:int = int(f.readline())
         inputs:list[str] = [f.readline().rstrip('\n') for i in range(0,inputs_len)]
-        d = WordDict()
+        d = Task2.WordDict()
         d.add_word(*words)
         errors:set[str] = set()
         for line in inputs:
@@ -49,14 +50,12 @@ def task2() -> None:
 
 def task3() -> None:
     print('ЗАДАЧА 3')
-    import src.tasks.db1 as db
-    db.create('files/database.sqlite')
+    Task34.create('files/database.sqlite')
     pass
 
 def task4() -> None:
     print('ЗАДАЧА 4')
-    import src.tasks.db1 as db
-    db.create('files/database.sqlite',True)
+    Task34.create('files/database.sqlite',True)
     pass
 
 
