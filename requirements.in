@@ -7,7 +7,7 @@ flake8
 pytest
 
 # Для ноутбуков
-nbopen
+# nbopen
 
 # Библиотеки
 pandas
