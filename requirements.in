@@ -7,12 +7,16 @@ flake8
 pytest
 
 # Для ноутбуков
+ipykernel
+ipython
+nbformat>=4.2.0
 # nbopen
+
 
 # Библиотеки
 pandas
 plotly
-ipython
+
 
 # Для типизации
 pytest-stub
