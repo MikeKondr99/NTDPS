@@ -7,15 +7,12 @@ import subprocess  # для запуска питон ноутбуков
 
 
 def run_notebook(path: str) -> None:
-    print("Открываем интерактивную среду ...")
+    print("Открываем интерактивную среду : D ...")
     subprocess.run(["nbopen", path])
 
 
-def lab1_1() -> None:
-    run_notebook("src/labs/lab1/ufo_data.ipynb")
-
-
-def lab1_2() -> None:
+def lab1() -> None:
+    print("Лабораторная 1")
     text = ""
     while text != "q":
         try:
@@ -23,6 +20,9 @@ def lab1_2() -> None:
             print(calc.eval(text))
         except Exception as e:
             print(str(e))
+    return
+    print("Открываем интерактивную среду : D ...")
+    subprocess.run(["nbopen", "src/labs/ufo_data.ipynb"])
 
 
 def task1() -> None:
@@ -56,34 +56,31 @@ def task34() -> None:
     run_notebook("src/tasks/db.ipynb")
 
 
+def task4() -> None:
+    run_notebook("src/tasks/db.ipynb")
+
+
 tasks: dict[str, Callable[[], None]] = {
     "t1": task1,
     "t2": task2,
     "t3": task34,
     "t4": task34,
-    "l1.1": lab1_1,
-    "l1.2": lab1_2,
+    "l1": lab1,
 }
 
 
 def main() -> None:
-    choice = ""
-    while choice != "q":
-        if not os.path.isdir("files"):
-            os.mkdir("files")
-        choice = input("Введите что запустить (t# или l#): ")
-        if choice in tasks:
-            if choice[0] == "t":
-                print(f"ЗАДАЧА {choice[1:]}")
-            elif choice[0] == "l":
-                print(f"ЛАБОРАТОРНАЯ {choice[1:]}")
-            tasks[choice]()
+    if not os.path.isdir("files"):
+        os.mkdir("files")
+    choice = input("Введите что запустить (t# или l#): ")
+    if choice in tasks:
+        if choice[0] == "t":
+            print("Задача", choice[1:])
         else:
-            hints = filter(lambda x: x.startswith(choice), tasks)
-            if hints:
-                print(f'Может вы имели ввиду {" ".join(hints)}')
-            print(f"Не существует такого задания {choice}")
-            input()
+            print("Задача", choice[1:])
+        tasks[choice]()
+    else:
+        print(f"Не существует такого задания {choice}")
 
 
 if __name__ == "__main__":
