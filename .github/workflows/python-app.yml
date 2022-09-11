@@ -16,7 +16,6 @@ jobs:
   build:
     name: python full check
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -26,17 +25,13 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --max-complexity=10
+        pip install pip-tools
+        pip-compile
+        pip-sync
     - name: TypeChecking
       run: |
-        # checking types in src
         mypy . --strict
     - name: Unit testing
       run: |
-        # checking run unit
         pytest
 
