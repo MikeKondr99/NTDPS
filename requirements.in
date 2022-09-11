@@ -8,9 +8,8 @@ pytest
 
 # Для ноутбуков
 ipykernel
-ipython
 nbformat>=4.2.0
-# nbopen
+nbopen
 
 
 # Библиотеки
