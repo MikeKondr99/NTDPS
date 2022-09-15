@@ -30,7 +30,7 @@ jobs:
         pip-sync
     - name: TypeChecking
       run: |
-        mypy . --strict
+        mypy .
     - name: Unit testing
       run: |
         pytest
