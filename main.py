@@ -1,8 +1,10 @@
 import os
+from rich import print
 from typing import Callable
 import src.tasks.football as Task1  # Задача 1
 import src.tasks.dictionary as Task2  # Задача 2
 import src.labs.lab1.my_calc as calc  # Лабораторная 1.2
+from src.labs.lab2.cui import GameFieldRenderer
 import subprocess  # для запуска питон ноутбуков
 
 
@@ -22,7 +24,7 @@ def lab1() -> None:
             print(str(e))
     return
     print("Открываем интерактивную среду : D ...")
-    subprocess.run(["nbopen", "src/labs/ufo_data.ipynb"])
+    subprocess.run(["nbopen", "src/labs/lab1/ufo_data.ipynb"])
 
 
 def task1() -> None:
@@ -60,27 +62,34 @@ def task4() -> None:
     run_notebook("src/tasks/db.ipynb")
 
 
+def lab2() -> None:
+    game = GameFieldRenderer(10, 10)
+    game.run()
+
+
 tasks: dict[str, Callable[[], None]] = {
     "t1": task1,
     "t2": task2,
     "t3": task34,
     "t4": task34,
     "l1": lab1,
+    "l2": lab2,
 }
 
 
 def main() -> None:
+    print("[green on blue]Fear is the mind-killer[/]")
     if not os.path.isdir("files"):
         os.mkdir("files")
     choice = input("Введите что запустить (t# или l#): ")
     if choice in tasks:
         if choice[0] == "t":
-            print("Задача", choice[1:])
+            print("[blue]Задача", choice[1:])
         else:
-            print("Задача", choice[1:])
+            print("[blue]Задача", choice[1:])
         tasks[choice]()
     else:
-        print(f"Не существует такого задания {choice}")
+        print(f"[red]Не существует такого задания {choice}")
 
 
 if __name__ == "__main__":
