@@ -1,22 +1,24 @@
 # linting итд
-black
-mypy
-flake8
+black==22.8.0
+mypy==0.971
+flake8==5.0.4
 
 # Тесты
-pytest
+pytest==7.1.3
 
 # Для ноутбуков
-ipykernel
+ipykernel==6.15.2
 nbformat>=4.2.0
-nbopen
+nbopen==0.6
+keyboard
 
 
 # Библиотеки
-pandas
-plotly
+pandas==1.4.4
+plotly==5.10.0
+rich
 
 
 # Для типизации
-pytest-stub
-pandas-stubs
+pytest-stub==1.1.0
+pandas-stubs==1.4.4.220906
