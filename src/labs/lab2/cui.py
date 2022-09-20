@@ -8,28 +8,25 @@ from rich.prompt import Prompt
 import random
 import time
 from typing import Tuple
+from src.labs.lab2.game import Field
 
 
 class GameFieldRenderer:
     def __init__(self, rows: int, cols: int) -> None:
-        self.rows = rows
-        self.cols = cols
         self.cursor: list[int] = [2, 2]
         self.cursor_visible: bool = False
-        self.field: list[list[MockUnit]] = []
-        for i in range(0, rows):
-            self.field.append([])
-            for j in range(0, cols):
-                self.field[i].append(MockUnit())
+        self.field: Field = Field(rows, cols)
 
     def __rich__(self) -> str:
         res = ""
-        for x in range(0, self.rows):
-            for y in range(0, self.cols):
+        for x in range(0, self.field.rows):
+            for y in range(0, self.field.cols):
                 if x == self.cursor[0] and y == self.cursor[1]:
-                    res += "[on black]" + str(self.field[x][y]) + "[/on black]"
+                    res += (
+                        "[on black]" + str(self.field.environment[x][y]) + "[/on black]"
+                    )
                 else:
-                    res += self.field[x][y].__rich__()
+                    res += str(self.field.environment[x][y])
             res += "\n"
         return res[:-1]
 
@@ -48,7 +45,7 @@ class GameFieldRenderer:
                     os.system("cls")
                     print(Panel.fit(self.__rich__()), end="")
                 elif keyboard.is_pressed("d"):
-                    self.cursor[1] = min(self.rows - 1, self.cursor[1] + 1)
+                    self.cursor[1] = min(self.field.rows - 1, self.cursor[1] + 1)
                     os.system("cls")
                     print(Panel.fit(self.__rich__()), end="")
                 elif keyboard.is_pressed("w"):
@@ -56,7 +53,7 @@ class GameFieldRenderer:
                     os.system("cls")
                     print(Panel.fit(self.__rich__()), end="")
                 elif keyboard.is_pressed("s"):
-                    self.cursor[0] = min(self.cols - 1, self.cursor[0] + 1)
+                    self.cursor[0] = min(self.field.cols - 1, self.cursor[0] + 1)
                     os.system("cls")
                     print(Panel.fit(self.__rich__()), end="")
                 elif keyboard.is_pressed("f"):

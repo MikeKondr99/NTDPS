@@ -17,6 +17,7 @@ keyboard
 pandas==1.4.4
 plotly==5.10.0
 rich
+perlin-noise = 1.12
 
 
 # Для типизации
