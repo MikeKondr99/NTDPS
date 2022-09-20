@@ -270,10 +270,10 @@ all_colors = [
 
 
 def lab2() -> None:
-    for color in all_colors:
+    """for color in all_colors:
         print(f"[{color}]{color}[/]")
-    input()
-    game = GameFieldRenderer(15, 15)
+    input()"""
+    game = GameFieldRenderer(16, 16)
     game.run()
 
 

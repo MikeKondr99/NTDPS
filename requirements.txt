@@ -138,6 +138,8 @@ parso==0.8.3
     # via jedi
 pathspec==0.10.1
     # via black
+perlin-noise==1.12
+    # via -r requirements.in
 pickleshare==0.7.5
     # via ipython
 platformdirs==2.5.2

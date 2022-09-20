@@ -38,6 +38,9 @@ class GameFieldRenderer:
             cmd = input("> ")
             if cmd == "q":
                 break
+            if cmd == "r":
+                self.field = Field(self.field.rows, self.field.cols)
+            continue
             self.cursor_visible = True
             while True:
                 if keyboard.is_pressed("a"):
@@ -63,36 +66,3 @@ class GameFieldRenderer:
                 time.sleep(0.1)
             self.cursor_visible = False
         return
-
-
-class MockUnit:
-    def __init__(self) -> None:
-        self.char: str = " "
-        self.color: str | None = None
-        self.oncolor: str | None = None
-        if random.randrange(1, 100) < 10:
-            self.char = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-            self.color = random.choice(
-                ["white", "black"],
-            )
-            self.oncolor = random.choice(["green", "grey37", "dark_blue"])
-        else:
-            (self.char, self.color, self.oncolor) = random.choice(
-                [
-                    (" ", "blue", "green"),
-                    (" ", "grey69", "grey37"),
-                    (" ", "blue", "dark_blue"),
-                ]
-            )
-
-    def __rich__(self) -> str:
-        if self.color is not None:
-            if self.oncolor is not None:
-                return f"[{self.color} on {self.oncolor}]{self.char}[/]"
-            else:
-                return f"[{self.color}]{self.char}[/]"
-        else:
-            return self.char
-
-    def __str__(self) -> str:
-        return self.char
