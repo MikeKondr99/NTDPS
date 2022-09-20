@@ -8,7 +8,7 @@ from rich.prompt import Prompt
 import random
 import time
 from typing import Tuple
-from src.labs.lab2.game import Field
+from src.labs.lab2.game import Field, Unit
 
 
 class GameFieldRenderer:
@@ -21,12 +21,19 @@ class GameFieldRenderer:
         res = ""
         for x in range(0, self.field.rows):
             for y in range(0, self.field.cols):
-                if x == self.cursor[0] and y == self.cursor[1]:
-                    res += (
-                        "[on black]" + str(self.field.environment[x][y]) + "[/on black]"
-                    )
+                unit = self.field.units[x][y]
+                env = self.field.environment[x][y]
+                if x == self.cursor[0] and y == self.cursor[1] and self.cursor_visible:
+                    if isinstance(unit, Unit):
+                        res += f"[on black]{unit.symbol}[/on black]"
+                    else:
+                        res += f"[on black]{env.symbol}[/on black]"
                 else:
-                    res += str(self.field.environment[x][y])
+                    if isinstance(unit, Unit):
+                        res += f"[{unit.color} on {env.on_color}]{unit.symbol}[/]"
+                    else:
+                        res += str(env)
+
             res += "\n"
         return res[:-1]
 
@@ -40,7 +47,7 @@ class GameFieldRenderer:
                 break
             if cmd == "r":
                 self.field = Field(self.field.rows, self.field.cols)
-            continue
+                continue
             self.cursor_visible = True
             while True:
                 if keyboard.is_pressed("a"):

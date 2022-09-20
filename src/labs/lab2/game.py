@@ -68,7 +68,7 @@ class Field:
             self.units.append([])
             for j in range(0, self.cols):
                 self.units[i].append(None)
-        self.units[i][j] = Unit("B", "white")
+        self.units[7][7] = Unit("B", "white")
         self.GenerateMap()
 
     @property
@@ -102,7 +102,7 @@ class Field:
                     self.environment[i][j] = Field.forest
                 # Горы
                 val2 = mountain([i / self.rows, j / self.cols])
-                if val2 > 0.16 and val2 < 0.20:
+                if val2 > 0.16 and val2 < 0.19:
                     self.environment[i][j] = Field.mountain
                 # Реки
                 val = river([i / self.rows, j / self.cols])
