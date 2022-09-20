@@ -1,4 +1,5 @@
-from typing import TypeVar
+from typing import TypeVar, Callable
+import time
 
 TNum = TypeVar("TNum", int, float, str)
 
@@ -45,3 +46,10 @@ def quick(input: list[TNum]) -> list[TNum]:
     res = input[:]
     sort(0, len(res) - 1)
     return res
+
+
+def timeit(func: Callable) -> float:
+    start = time.time()
+    func()
+    end = time.time()
+    return end - start

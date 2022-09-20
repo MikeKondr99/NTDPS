@@ -5,6 +5,7 @@ flake8==5.0.4
 
 # Тесты
 pytest==7.1.3
+pytest-benchmark
 
 # Для ноутбуков
 ipykernel==6.15.2

@@ -1,10 +1,18 @@
+import random
 import pytest
+from pytest_benchmark.fixture import BenchmarkFixture  # type:ignore
 from typing import Tuple, TypeVar
 import src.labs.lab3.sorts as sort
 from src.labs.lab3.sorts import TNum
 
+random.seed(0x1C2C6D66)
 
-def prep(input: list[TNum]) -> Tuple[list[TNum], list[TNum]]:
+TestData = Tuple[list[TNum], list[TNum]]
+
+SIZES = [10, 1000, 5000]
+
+
+def prep(input: list[TNum]) -> TestData:
     return (input, sorted(input))
 
 
@@ -19,13 +27,13 @@ input5 = [
     " Keen",
     " Pig farm",
     " Polio",
-    " Ratny",
+    " Rat",
     " Snowman",
     " To",
 ]
 
 
-PARAMS = [prep(input1), prep(input2), prep(input3), prep(input4)]
+PARAMS = [prep(input1), prep(input2), prep(input3), prep(input4), prep(input5)]
 
 
 @pytest.mark.parametrize("input,expected", PARAMS)
@@ -41,3 +49,10 @@ def test_selection(input: list[TNum], expected: list[TNum]) -> None:
 @pytest.mark.parametrize("input,expected", PARAMS)
 def test_quick(input: list[TNum], expected: list[TNum]) -> None:
     assert sort.quick(input) == expected
+
+
+""" @pytest.mark.parametrize("size", SIZES)
+def test_bench_quick(benchmark, size: int) -> None:  # type: ignore
+    data = [random.randint(-10000, 10000) for i in range(0, size)]
+    result = benchmark(sort.quick, data)
+    assert result == sorted(data) """
