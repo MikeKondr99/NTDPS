@@ -24,10 +24,10 @@
        <widget class="QTextEdit" name="tbInput">
         <property name="font">
          <font>
-          <family>Cascadia Code SemiBold</family>
-          <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
+          <family>Cascadia Code Light</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
         </property>
        </widget>
@@ -52,10 +52,10 @@
        <widget class="QTextEdit" name="tbOutput">
         <property name="font">
          <font>
-          <family>Cascadia Code SemiBold</family>
-          <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
+          <family>Cascadia Code Light</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
         </property>
        </widget>
