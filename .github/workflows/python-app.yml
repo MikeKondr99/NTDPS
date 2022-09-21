@@ -25,8 +25,8 @@ jobs:
     - name: Install dependencies
       run: |
         pip install pip-tools
-        pip-compile
-        pip-sync
+        pip-compile req.in req-dev.in --output-file req.txt
+        pip-sync req.txt
     - name: TypeChecking
       run: |
         mypy .

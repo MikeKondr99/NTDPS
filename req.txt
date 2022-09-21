@@ -171,6 +171,14 @@ pygments==2.13.0
     #   rich
 pyparsing==3.0.9
     # via packaging
+pyqt5==5.15.7
+    # via -r requirements.in
+pyqt5-qt5==5.15.2
+    # via pyqt5
+pyqt5-sip==12.11.0
+    # via pyqt5
+pyqt5-stubs==5.15.6.0
+    # via -r requirements.in
 pyrsistent==0.18.1
     # via jsonschema
 pytest==7.1.3
