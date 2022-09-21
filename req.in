@@ -1,7 +1,7 @@
 # Тесты
 mypy==0.971
 pytest==7.1.3
-#pytest-benchmark==3.4.1
+pytest-benchmark==3.4.1
 
 # pyqt
 pyqt5
