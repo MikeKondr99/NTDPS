@@ -59,16 +59,17 @@ class Field:
     mountain = Environment(on_color="grey37", symbol="^")
     water = Environment(on_color="blue", symbol="≈", color="bright_blue")
 
-    def __init__(self, rows: int, cols: int) -> None:
+    def __init__(self, rows: int, cols: int, *, unit_cap: int = 30) -> None:
         self.__rows = rows
         self.__cols = cols
+        self.__unit_cap = unit_cap
+        self.__unit_count = unit_count
         self.environment: list[list[Environment]] = []
         self.units: list[list[Unit | None]] = []
         for i in range(0, self.rows):
             self.units.append([])
             for j in range(0, self.cols):
                 self.units[i].append(None)
-        self.units[7][7] = Unit("B", "white")
         self.GenerateMap()
 
     @property
@@ -79,7 +80,23 @@ class Field:
     def cols(self) -> int:
         return self.__cols
 
-    def GenerateMap(self) -> None:
+    @property
+    def unit_cap(self) -> int:
+        return self.__unit_cap
+
+    @property
+    def unit_count(self) -> int:
+        return self.__unit_count
+
+    def add(self, unit: Unit, row: int, col: int) -> str:
+        if self.unit_count >= self.unit_cap:
+            return "Достигнут предел отрядов!"
+        elif self.units[row][col] is not None:
+            return "Клетка занята!"
+        else:
+            self.units[row][col] = unit
+
+    def generate(self) -> None:
         river = PerlinNoise(0.5, random.randint(1, 1000))
         mountain = PerlinNoise(0.5, random.randint(1, 1000))
         forest = PerlinNoise(4, random.randint(1, 1000))
@@ -108,3 +125,5 @@ class Field:
                 val = river([i / self.rows, j / self.cols])
                 if val > 0.15 and val < 0.20:
                     self.environment[i][j] = Field.water
+        self.add
+        self.units[7][7] = Unit("B", "white")
