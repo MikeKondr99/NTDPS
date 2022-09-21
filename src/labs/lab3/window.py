@@ -17,17 +17,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnSelection.triggered.connect(self.quick)
 
     def save(self) -> None:
-        pass
+        path = QFileDialog().getSaveFileName()[0]
+        if path:
+            open(path).write(self.tbOutput.toPlainText())
 
     def load(self) -> None:
         path = QFileDialog().getOpenFileName()[0]
-        if not path:
-            return
-        msgBox = QMessageBox()
-        msgBox.setText(f"файл {path}")
-        msgBox.exec()
-        file = open(path).read()
-        self.tbInput.setPlainText(file)
+        if path:
+            self.tbOutput.setPlainText(open(path).read())
 
     def bubble(self) -> None:
         pass
