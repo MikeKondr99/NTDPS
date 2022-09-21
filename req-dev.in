@@ -1,5 +1,5 @@
-# linting итд
-black==22.8.0
+# formater
+autopep8
 
 # Для ноутбуков
 ipykernel==6.15.2
@@ -8,4 +8,4 @@ nbopen==0.6
 plotly==5.10.0
 
 # pyqt
-# pyqt5-tools установил дезайнер в ручную
+

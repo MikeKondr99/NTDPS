@@ -1,4 +1,5 @@
 import os
+from src.labs.lab3.window import run as lab3
 from rich import print
 from typing import Callable
 import src.tasks.football as Task1  # Задача 1
@@ -43,9 +44,11 @@ def task2() -> None:
 
     with open(path) as f:
         words_len: int = int(f.readline())
-        words: list[str] = [f.readline().rstrip("\n") for i in range(0, words_len)]
+        words: list[str] = [f.readline().rstrip("\n")
+                            for i in range(0, words_len)]
         inputs_len: int = int(f.readline())
-        inputs: list[str] = [f.readline().rstrip("\n") for i in range(0, inputs_len)]
+        inputs: list[str] = [f.readline().rstrip("\n")
+                             for i in range(0, inputs_len)]
         d = Task2.WordDict()
         d.add_word(*words)
         errors: set[str] = set()
@@ -74,11 +77,11 @@ tasks: dict[str, Callable[[], None]] = {
     "t4": task34,
     "l1": lab1,
     "l2": lab2,
+    "l3": lab3,
 }
 
 
 def main() -> None:
-    print("[green on blue]Fear is the mind-killer[/]")
     if not os.path.isdir("files"):
         os.mkdir("files")
     choice = input("Введите что запустить (t# или l#): ")
