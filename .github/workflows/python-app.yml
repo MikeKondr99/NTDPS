@@ -25,12 +25,12 @@ jobs:
     - name: Install dependencies
       run: |
         pip install pip-tools
-        pip-compile
-        pip-sync
+        pip-compile req.in --output-file req.txt
+        pip-sync req.txt
     - name: TypeChecking
       run: |
         mypy .
     - name: Unit testing
       run: |
-        pytest
+        pytest --benchmark-skip
 

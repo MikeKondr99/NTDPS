@@ -39,17 +39,8 @@ def quick(input: list[TNum]) -> list[TNum]:
                 res[i], res[j] = res[j], res[i]
                 i += 1
         res[i], res[end] = res[end], res[i]
-        print(i)
-        print(res)
         return i
 
     res = input[:]
     sort(0, len(res) - 1)
     return res
-
-
-def timeit(func: Callable) -> float:
-    start = time.time()
-    func()
-    end = time.time()
-    return end - start
