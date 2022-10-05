@@ -2,22 +2,23 @@
 DROP VIEW IF EXISTS activation_orders;
 CREATE VIEW activation_orders as -- содержит все заказы активации (новые и реактивации)
     SELECT 
-        ord1.order_id as order_id,
-        ord1.user_id as user_id,
-        ord1.order_time as order_time
-    FROM orders as ord1
-    JOIN orders as ord2 
-    ON ord1.user_id = ord2.user_id
+        o.order_id as order_id,
+        o.user_id as user_id,
+        o.order_time as order_time
+    FROM orders as o
+    JOIN orders as o2 
+    ON o.user_id = o2.user_id
     WHERE 
         -- ищем успешные пары заказов с возможной зависимостью от другого заказа
-        datetime(ord1.order_time) BETWEEN datetime(ord2.order_time,'-90 day') AND datetime(ord2.order_time)
-        AND ord1.success_order_flg = 1
-        AND ord2.success_order_flg = 1
-    GROUP BY ord2.order_id
+        datetime(o.order_time) BETWEEN datetime(o2.order_time,'-90 day') AND datetime(o2.order_time)
+        -- оба заказа должны быть успешными
+        AND o.success_order_flg = 1
+        AND o2.success_order_flg = 1
+    GROUP BY o2.order_id
     -- находим заказ который точно зависит только от себя
     -- он является новым или реактивационным
-    HAVING count(ord1.order_id) = 1
-    ORDER BY ord1.order_id;
+    HAVING count(o.order_id) = 1
+    ORDER BY o.order_id;
 
 DROP VIEW IF EXISTS activation_ranges;
 CREATE VIEW activation_ranges as
@@ -25,18 +26,20 @@ CREATE VIEW activation_ranges as
         ao1.user_id as user_id,
         ao1.order_id as order_id,
         ao1.order_time as start_time,
+        -- для каждой даты начала диапазона нас интересует самый короткий
         min(
             CASE
                 WHEN ao1.order_time >= ao2.order_time THEN datetime('now') ELSE datetime(ao2.order_time,'-1 second')
-            END)
-            as end_time,
-            ao1.order_time = mo.order_time as is_new
+            END) as end_time,
+        ao1.order_time = mo.order_time as is_new
     FROM activation_orders as ao1
     LEFT JOIN activation_orders as ao2
     ON ao1.user_id = ao2.user_id
     LEFT JOIN 
+        -- по минимальному времени для пользователя определям первый заказ и период активации
         (SELECT user_id,min(order_time) as order_time FROM activation_orders GROUP BY user_id) as mo
     ON ao1.user_id = mo.user_id
+    -- интересуют только диапазоны где один раньше другого
     WHERE ao1.order_time <= ao2.order_time 
     GROUP BY ao1.order_id
     ORDER BY ao1.user_id,start_time;

@@ -87,7 +87,7 @@ matplotlib-inline==0.1.6
     #   ipython
 mistune==2.0.4
     # via nbconvert
-mypy==0.971
+mypy==0.981
     # via
     #   -r req.in
     #   pyside2-stubs
