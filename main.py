@@ -65,6 +65,10 @@ def task4() -> None:
     run_notebook("src/tasks/db.ipynb")
 
 
+def lab4() -> None:
+    run_notebook("src/labs/lab4/lab4.ipynb")
+
+
 def lab2() -> None:
     game = GameFieldRenderer(10, 10)
     game.run()
@@ -78,6 +82,7 @@ tasks: dict[str, Callable[[], None]] = {
     "l1": lab1,
     "l2": lab2,
     "l3": lab3,
+    "l4": lab4,
 }
 
 
