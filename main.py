@@ -43,9 +43,11 @@ def task2() -> None:
 
     with open(path) as f:
         words_len: int = int(f.readline())
-        words: list[str] = [f.readline().rstrip("\n") for i in range(0, words_len)]
+        words: list[str] = [f.readline().rstrip("\n")
+                            for i in range(0, words_len)]
         inputs_len: int = int(f.readline())
-        inputs: list[str] = [f.readline().rstrip("\n") for i in range(0, inputs_len)]
+        inputs: list[str] = [f.readline().rstrip("\n")
+                             for i in range(0, inputs_len)]
         d = Task2.WordDict()
         d.add_word(*words)
         errors: set[str] = set()
@@ -267,6 +269,10 @@ all_colors = [
     "grey89",
     "grey93",
 ]
+
+
+def lab4() -> None:
+    run_notebook("src/labs/lab4/lab4.ipynb")
 
 
 def lab2() -> None:
