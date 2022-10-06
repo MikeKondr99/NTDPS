@@ -1,53 +1,6 @@
-import random
+from src.labs.lab2 import Environment, Unit
 from perlin_noise import PerlinNoise  # type: ignore
-
-
-class Environment:
-    def __init__(
-        self,
-        *,
-        color: str | None = None,
-        on_color: str | None = None,
-        symbol: str = " ",
-    ):
-        self.__color = color
-        self.__on_color = on_color
-        self.__symbol = symbol
-
-    @property
-    def color(self) -> str | None:
-        return self.__color
-
-    @property
-    def on_color(self) -> str | None:
-        return self.__on_color
-
-    @property
-    def symbol(self) -> str:
-        return self.__symbol
-
-    def __str__(self) -> str:
-        if self.color is None:
-            return f"[on {self.on_color}]{self.symbol}[/]"
-        elif self.on_color is None:
-            return f"[{self.color}]{self.symbol}[/]"
-        else:
-            return f"[{self.color} on {self.on_color}]{self.symbol}[/]"
-
-
-# base \u25D9
-class Unit:
-    def __init__(self, symbol: str, color: str):
-        self.__color = color
-        self.__symbol = symbol
-
-    @property
-    def color(self) -> str | None:
-        return self.__color
-
-    @property
-    def symbol(self) -> str:
-        return self.__symbol
+import random
 
 
 class Field:
@@ -63,14 +16,14 @@ class Field:
         self.__rows = rows
         self.__cols = cols
         self.__unit_cap = unit_cap
-        self.__unit_count = unit_count
+        self.__unit_count = 0
         self.environment: list[list[Environment]] = []
         self.units: list[list[Unit | None]] = []
         for i in range(0, self.rows):
             self.units.append([])
             for j in range(0, self.cols):
                 self.units[i].append(None)
-        self.GenerateMap()
+        self.generate()
 
     @property
     def rows(self) -> int:
@@ -95,6 +48,7 @@ class Field:
             return "Клетка занята!"
         else:
             self.units[row][col] = unit
+            return "success"
 
     def generate(self) -> None:
         river = PerlinNoise(0.5, random.randint(1, 1000))

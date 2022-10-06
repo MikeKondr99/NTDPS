@@ -8,7 +8,7 @@ from rich.prompt import Prompt
 import random
 import time
 from typing import Tuple
-from src.labs.lab2.game import Field, Unit
+from src.labs.lab2 import Field, Unit
 
 
 class GameFieldRenderer:
@@ -55,7 +55,8 @@ class GameFieldRenderer:
                     os.system("cls")
                     print(Panel.fit(self.__rich__()), end="")
                 elif keyboard.is_pressed("d"):
-                    self.cursor[1] = min(self.field.rows - 1, self.cursor[1] + 1)
+                    self.cursor[1] = min(
+                        self.field.rows - 1, self.cursor[1] + 1)
                     os.system("cls")
                     print(Panel.fit(self.__rich__()), end="")
                 elif keyboard.is_pressed("w"):
@@ -63,7 +64,8 @@ class GameFieldRenderer:
                     os.system("cls")
                     print(Panel.fit(self.__rich__()), end="")
                 elif keyboard.is_pressed("s"):
-                    self.cursor[0] = min(self.field.cols - 1, self.cursor[0] + 1)
+                    self.cursor[0] = min(
+                        self.field.cols - 1, self.cursor[0] + 1)
                     os.system("cls")
                     print(Panel.fit(self.__rich__()), end="")
                 elif keyboard.is_pressed("f"):
