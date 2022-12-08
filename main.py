@@ -4,7 +4,7 @@ from typing import Callable
 import src.tasks.football as Task1  # Задача 1
 import src.tasks.dictionary as Task2  # Задача 2
 import src.labs.lab1.my_calc as calc  # Лабораторная 1.2
-from src.labs.lab2.cui import GameFieldRenderer
+from src.labs.lab2.game import GameFieldRenderer
 import subprocess  # для запуска питон ноутбуков
 
 
